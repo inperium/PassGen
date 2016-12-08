@@ -1,5 +1,6 @@
 package passgen.model;
 
-public class PassGen {
+public class PassGen 
+{
 
 }
