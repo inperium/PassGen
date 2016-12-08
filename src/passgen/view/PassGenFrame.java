@@ -21,7 +21,9 @@ public class PassGenFrame extends JFrame
 	{
 		this.setContentPane(passPanel);
 		this.setTitle("PassGen");
-		this.setSize(600, 970);
+		this.setSize(650, 400);
+		this.setResizable(false);
+		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 	}
 	
