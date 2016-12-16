@@ -39,7 +39,7 @@ public class PassGenPanel extends JPanel {
 		this.setLayout(baseLayout);
 		this.setBackground(new Color (70, 137,102));
 		this.add(lengthSlider);
-		passwordDisplay.setEditable(false);
+		passwordDisplay.setEditable(true);
 		this.add(passwordDisplay);
 		Font font = null;
 		try {
