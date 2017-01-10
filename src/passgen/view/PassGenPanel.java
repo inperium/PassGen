@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.JTextPane;
 import javax.swing.SpringLayout;
+import javax.swing.SwingUtilities;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.text.SimpleAttributeSet;
@@ -18,7 +19,9 @@ import javax.swing.text.StyleConstants;
 import passgen.controller.PassGenController;
 
 public class PassGenPanel extends JPanel {
+	
 	private PassGenController baseController;
+	
 	private SpringLayout baseLayout;
 	private JTextPane passwordDisplay;
 	private JSlider lengthSlider;
@@ -28,7 +31,7 @@ public class PassGenPanel extends JPanel {
 		this.baseController = baseController;
 		baseLayout = new SpringLayout();
 		passwordDisplay = new JTextPane();
-		this.lengthSlider = new JSlider();
+		lengthSlider = new JSlider();
 
 		setupPanel();
 		setupLayout();
@@ -40,8 +43,8 @@ public class PassGenPanel extends JPanel {
 		this.setLayout(baseLayout);
 		this.setBackground(new Color(62, 96, 111));
 		this.add(lengthSlider);
-		passwordDisplay.setEditable(true);
 		this.add(passwordDisplay);
+		this.passwordDisplay.setEditable(true);
 		Font font = null;
 		try {
 			font = Font.createFont(Font.TRUETYPE_FONT,
@@ -51,7 +54,7 @@ public class PassGenPanel extends JPanel {
 			StyleConstants.setAlignment(attribute, StyleConstants.ALIGN_CENTER);
 			passwordDisplay.setParagraphAttributes(attribute, false);
 			passwordDisplay.setFont(new Font("Elegant Lux Mager", Font.BOLD, 30));
-			passwordDisplay.setText("elegantrandompassword");
+			passwordDisplay.setText(" ");
 		} catch (FontFormatException | IOException e) {
 			e.printStackTrace();
 		}
@@ -70,7 +73,13 @@ public class PassGenPanel extends JPanel {
 		this.lengthSlider.addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent e) {
-			 this.getPassGen.getRandomPassword();
+				String password = baseController.getPassGen().getRandomPassword(lengthSlider.getValue(), true, true, true, true);
+				SwingUtilities.invokeLater(new Runnable() {
+					@Override
+					public void run() {
+						passwordDisplay.setText(password);
+					}
+				});
 			}
 		});
 	}

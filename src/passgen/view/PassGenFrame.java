@@ -11,7 +11,7 @@ public class PassGenFrame extends JFrame
 	public PassGenFrame(PassGenController passGenController) 
 	{
 			super();
-			this.baseController = baseController;
+			this.baseController = passGenController;
 			this.passPanel = new PassGenPanel(baseController);
 			
 			this.setupFrame();

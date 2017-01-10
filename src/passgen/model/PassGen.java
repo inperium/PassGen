@@ -31,13 +31,10 @@ public class PassGen {
 	private void generatePasswordArrays() {
 		for (int index = 97; index <= 122; index++) {
 			this.lowerCaseLetters[index - 97] = index;
-
-			System.out.println(this.lowerCaseLetters[index - 97]);
 		}
 
 		for (int index = 65; index <= 90; index++) {
 			this.upperCaseLetters[index - 65] = index;
-			System.out.println(this.upperCaseLetters[index - 65]);
 
 		}
 
@@ -47,12 +44,10 @@ public class PassGen {
 
 		for (int index = 33; index <= 45; index++) {
 			this.specialCharacters[index - 33] = index;
-			System.out.println(this.specialCharacters[index - 33]);
 		}
 	}
 
-	public String getRandomPassword(int jSliderValue, boolean lowerCase, boolean upperCase, boolean numbers,
-			boolean special) {
+	public String getRandomPassword(int jSliderValue, boolean lowerCase, boolean upperCase, boolean numbers, boolean special) {
 		String randomPassword = "";
 		for (int index = 0; index < jSliderValue; index++) {
 			int passwordLength = randomPassword.length();
@@ -64,7 +59,7 @@ public class PassGen {
 			} else if (upperCase && randomNumber == 1) {
 				randomPassword += String.valueOf((char) this.getRandomFromArray(this.upperCaseLetters));
 			} else if (numbers && randomNumber == 2) {
-				randomPassword += String.valueOf((char) this.getRandomFromArray(this.numbers));
+				randomPassword += String.valueOf(this.getRandomFromArray(this.numbers));
 			} else if (special && randomNumber == 3) {
 				randomPassword += String.valueOf((char) this.getRandomFromArray(this.specialCharacters));
 			}
