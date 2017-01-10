@@ -3,25 +3,21 @@ package passgen.controller;
 import passgen.model.PassGen;
 import passgen.view.PassGenFrame;
 
-public class PassGenController 
-{
+public class PassGenController {
 	private PassGen passGen;
 	private String password;
 	private PassGenFrame passFrame;
-	
-	public PassGenController()
-	{
-		passGen = new PassGen();
-		passFrame = new PassGenFrame(this);			
+
+	public PassGenController() {
+		passGen = new PassGen(this);
+		passFrame = new PassGenFrame(this);
 	}
-	
-	public void start() 
-	{
-		
+
+	public void start() {
+
 	}
-	
-	public PassGen getPassGen()
-	{
+
+	public PassGen getPassGen() {
 		return passGen;
 	}
 
