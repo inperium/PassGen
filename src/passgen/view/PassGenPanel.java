@@ -5,8 +5,8 @@ import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.GraphicsEnvironment;
 import java.io.IOException;
-
 import javax.swing.JPanel;
+import javax.swing.JCheckBox;
 import javax.swing.JSlider;
 import javax.swing.JTextPane;
 import javax.swing.SpringLayout;
@@ -21,7 +21,10 @@ import passgen.controller.PassGenController;
 public class PassGenPanel extends JPanel {
 	
 	private PassGenController baseController;
-	
+	private JCheckBox lowerCaseCheck;
+	private JCheckBox upperCaseCheck;
+	private JCheckBox numberCheck;
+	private JCheckBox specialCheck;
 	private SpringLayout baseLayout;
 	private JTextPane passwordDisplay;
 	private JSlider lengthSlider;
@@ -32,6 +35,10 @@ public class PassGenPanel extends JPanel {
 		baseLayout = new SpringLayout();
 		passwordDisplay = new JTextPane();
 		lengthSlider = new JSlider();
+		lowerCaseCheck = new JCheckBox("Lowercase");
+		upperCaseCheck = new JCheckBox("Uppercase");
+		numberCheck = new JCheckBox("Numbers");
+		specialCheck = new JCheckBox("Special Characters");
 
 		setupPanel();
 		setupLayout();
@@ -44,6 +51,10 @@ public class PassGenPanel extends JPanel {
 		this.setBackground(new Color(62, 96, 111));
 		this.add(lengthSlider);
 		this.add(passwordDisplay);
+		this.add(lowerCaseCheck);
+		this.add(upperCaseCheck);
+		this.add(numberCheck);
+		this.add(specialCheck);
 		this.passwordDisplay.setEditable(true);
 		Font font = null;
 		try {
@@ -61,6 +72,14 @@ public class PassGenPanel extends JPanel {
 	}
 
 	private void setupLayout() {
+		baseLayout.putConstraint(SpringLayout.NORTH, lowerCaseCheck, 108, SpringLayout.SOUTH, passwordDisplay);
+		baseLayout.putConstraint(SpringLayout.EAST, lowerCaseCheck, -493, SpringLayout.EAST, this);
+		baseLayout.putConstraint(SpringLayout.NORTH, upperCaseCheck, 0, SpringLayout.NORTH, lowerCaseCheck);
+		baseLayout.putConstraint(SpringLayout.WEST, upperCaseCheck, 33, SpringLayout.EAST, lowerCaseCheck);
+		baseLayout.putConstraint(SpringLayout.NORTH, numberCheck, 0, SpringLayout.NORTH, lowerCaseCheck);
+		baseLayout.putConstraint(SpringLayout.WEST, numberCheck, 33, SpringLayout.EAST, upperCaseCheck);
+		baseLayout.putConstraint(SpringLayout.NORTH, specialCheck, 0, SpringLayout.NORTH, lowerCaseCheck);
+		baseLayout.putConstraint(SpringLayout.WEST, specialCheck, 30, SpringLayout.EAST, numberCheck);
 		baseLayout.putConstraint(SpringLayout.NORTH, passwordDisplay, 50, SpringLayout.NORTH, this);
 		baseLayout.putConstraint(SpringLayout.WEST, passwordDisplay, 125, SpringLayout.WEST, this);
 		baseLayout.putConstraint(SpringLayout.SOUTH, passwordDisplay, 140, SpringLayout.NORTH, this);
@@ -73,7 +92,8 @@ public class PassGenPanel extends JPanel {
 		this.lengthSlider.addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent e) {
-				String password = baseController.getPassGen().getRandomPassword(lengthSlider.getValue(), true, true, true, true);
+				String password = baseController.getPassGen().getRandomPassword(lengthSlider.getValue()/2, false, false, true, false);
+				System.out.println(password);
 				SwingUtilities.invokeLater(new Runnable() {
 					@Override
 					public void run() {

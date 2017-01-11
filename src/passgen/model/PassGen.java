@@ -50,10 +50,122 @@ public class PassGen {
 	public String getRandomPassword(int jSliderValue, boolean lowerCase, boolean upperCase, boolean numbers, boolean special) {
 		String randomPassword = "";
 		for (int index = 0; index < jSliderValue; index++) {
-			int passwordLength = randomPassword.length();
+			if(lowerCase == true && upperCase == true && numbers == true && special == true)
+			{	
+				int randomNumber = this.random.nextInt(4);
+				if (randomNumber == 0) {
+					randomPassword += String.valueOf((char) this.getRandomFromArray(this.lowerCaseLetters));
+				} else if (randomNumber == 1) {
+					randomPassword += String.valueOf((char) this.getRandomFromArray(this.upperCaseLetters));
+				} else if (randomNumber == 2) {
+					randomPassword += String.valueOf(this.getRandomFromArray(this.numbers));
+				} else if (randomNumber == 3) {
+					randomPassword += String.valueOf((char) this.getRandomFromArray(this.specialCharacters));
+				}
+				}else if(lowerCase == true && upperCase == false && numbers == false && special == false){
+					randomPassword += String.valueOf((char) this.getRandomFromArray(this.lowerCaseLetters));
+				}else if(lowerCase == true && upperCase == true && numbers == false && special == false){
+					int randomNumber = this.random.nextInt(2);
+					if (randomNumber == 0) {
+						randomPassword += String.valueOf((char) this.getRandomFromArray(this.lowerCaseLetters));
+					} else if (randomNumber == 1) {
+						randomPassword += String.valueOf((char) this.getRandomFromArray(this.upperCaseLetters));
+					}
+				}else if(lowerCase == true && upperCase == true && numbers == true && special == false){
+					int randomNumber = this.random.nextInt(3);
+					if (randomNumber == 0) {
+						randomPassword += String.valueOf((char) this.getRandomFromArray(this.lowerCaseLetters));
+					} else if (randomNumber == 1) {
+						randomPassword += String.valueOf((char) this.getRandomFromArray(this.upperCaseLetters));
+					} else if (randomNumber == 2) {
+						randomPassword += String.valueOf(this.getRandomFromArray(this.numbers));
+					}
+				}else if(lowerCase == true && upperCase == false && numbers == true && special == false){
+					int randomNumber = this.random.nextInt(2);
+					if (randomNumber == 0) {
+						randomPassword += String.valueOf((char) this.getRandomFromArray(this.lowerCaseLetters));
+					} else if (randomNumber == 1) {
+						randomPassword += String.valueOf(this.getRandomFromArray(this.numbers));
+					}
+				}else if(lowerCase == true && upperCase == false && numbers == true && special == true){
+					int randomNumber = this.random.nextInt(3);
+					if (randomNumber == 0) {
+						randomPassword += String.valueOf((char) this.getRandomFromArray(this.lowerCaseLetters));
+					} else if (randomNumber == 1) {
+						randomPassword += String.valueOf(this.getRandomFromArray(this.numbers));
+					} else if (randomNumber == 2) {
+						randomPassword += String.valueOf((char) this.getRandomFromArray(this.specialCharacters));
+					}
+				}else if(lowerCase == true && upperCase == false && numbers == false && special == true){
+					int randomNumber = this.random.nextInt(2);
+					if (randomNumber == 0) {
+						randomPassword += String.valueOf((char) this.getRandomFromArray(this.lowerCaseLetters));
+					} else if (randomNumber == 1) {
+						randomPassword += String.valueOf((char) this.getRandomFromArray(this.specialCharacters));
+					}
+				}else if(lowerCase == true && upperCase == true && numbers == false && special == true){
+					int randomNumber = this.random.nextInt(4);
+					if (randomNumber == 0) {
+						randomPassword += String.valueOf((char) this.getRandomFromArray(this.lowerCaseLetters));
+					} else if (randomNumber == 1) {
+						randomPassword += String.valueOf((char) this.getRandomFromArray(this.upperCaseLetters));
+					} else if (randomNumber == 2) {
+						randomPassword += String.valueOf((char) this.getRandomFromArray(this.specialCharacters));
+					}
+				}else if(lowerCase == false && upperCase == true && numbers == false && special == false){
+					randomPassword += String.valueOf((char) this.getRandomFromArray(this.upperCaseLetters));
+				}else if(lowerCase == false && upperCase == true && numbers == true && special == false){
+					int randomNumber = this.random.nextInt(2);
+					if (randomNumber == 0) {
+						randomPassword += String.valueOf((char) this.getRandomFromArray(this.upperCaseLetters));
+					} else if (randomNumber == 1) {
+						randomPassword += String.valueOf(this.getRandomFromArray(this.numbers));
+					}
+				}else if(lowerCase == false && upperCase == true && numbers == true && special == true){
+					int randomNumber = this.random.nextInt(3);
+					if (randomNumber == 0) {
+						randomPassword += String.valueOf((char) this.getRandomFromArray(this.upperCaseLetters));
+					} else if (randomNumber == 1) {
+						randomPassword += String.valueOf(this.getRandomFromArray(this.numbers));
+					} else if (randomNumber == 2) {
+						randomPassword += String.valueOf((char) this.getRandomFromArray(this.specialCharacters));
+					}
+				}else if(lowerCase == false && upperCase == true && numbers == false && special == true){
+					int randomNumber = this.random.nextInt(2);
+					if (randomNumber == 0) {
+						randomPassword += String.valueOf((char) this.getRandomFromArray(this.upperCaseLetters));
+					} else if (randomNumber == 1) {
+						randomPassword += String.valueOf((char) this.getRandomFromArray(this.specialCharacters));
+					}
+				}else if(lowerCase == false && upperCase == false && numbers == true && special == false){
+					randomPassword += String.valueOf(this.getRandomFromArray(this.numbers));
+				}else if(lowerCase == false && upperCase == false && numbers == true && special == true){
+					int randomNumber = this.random.nextInt(2);
+					if (randomNumber == 0) {
+						randomPassword += String.valueOf(this.getRandomFromArray(this.numbers));
+					} else if (randomNumber == 1) {
+						randomPassword += String.valueOf((char) this.getRandomFromArray(this.specialCharacters));
+					}
+				}else if(lowerCase == false && upperCase == false && numbers == false && special == true){
+					randomPassword += String.valueOf((char) this.getRandomFromArray(this.specialCharacters));
+				}else{
+					System.out.println("There was an error");
+				}
 
+			}
+		return randomPassword;
+	}
+
+	private int getRandomFromArray(int[] numbers) {
+		return (int) numbers[this.random.nextInt(numbers.length)];
+	}
+
+	
+	
+	/*
+	 * int passwordLength = randomPassword.length();
+			
 			int randomNumber = this.random.nextInt(4);
-
 			if (lowerCase && randomNumber == 0) {
 				randomPassword += String.valueOf((char) this.getRandomFromArray(this.lowerCaseLetters));
 			} else if (upperCase && randomNumber == 1) {
@@ -63,16 +175,6 @@ public class PassGen {
 			} else if (special && randomNumber == 3) {
 				randomPassword += String.valueOf((char) this.getRandomFromArray(this.specialCharacters));
 			}
-
-			if (randomPassword.length() == passwordLength) {
-				randomPassword += String.valueOf((char) this.getRandomFromArray(this.lowerCaseLetters));
-			}
-		}
-		return randomPassword;
-	}
-
-	private int getRandomFromArray(int[] numbers) {
-		return (int) numbers[this.random.nextInt(numbers.length)];
-	}
-
+	 */
+	/// you should log off of your computer when you leave class!!!!!
 }
