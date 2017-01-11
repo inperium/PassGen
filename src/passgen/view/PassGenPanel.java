@@ -92,7 +92,7 @@ public class PassGenPanel extends JPanel {
 		this.lengthSlider.addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent e) {
-				String password = baseController.getPassGen().getRandomPassword(lengthSlider.getValue()/2, false, false, true, false);
+				String password = baseController.getPassGen().getRandomPassword(lengthSlider.getValue()/2, lowerCaseCheck.isSelected(), upperCaseCheck.isSelected(), numberCheck.isSelected(), specialCheck.isSelected());
 				System.out.println(password);
 				SwingUtilities.invokeLater(new Runnable() {
 					@Override
