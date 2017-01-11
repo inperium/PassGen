@@ -2,11 +2,7 @@ package passgen.model;
 
 import java.util.Random;
 
-import passgen.controller.PassGenController;
-
 public class PassGen {
-
-	private PassGenController passGenController;
 
 	private Random random;
 
@@ -15,8 +11,7 @@ public class PassGen {
 	private int[] numbers;
 	private int[] specialCharacters;
 
-	public PassGen(PassGenController passGenController) {
-		this.passGenController = passGenController;
+	public PassGen() {
 		this.random = new Random();
 
 		this.lowerCaseLetters = new int[26];

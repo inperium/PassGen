@@ -9,7 +9,7 @@ public class PassGenController {
 	private PassGenFrame passFrame;
 
 	public PassGenController() {
-		passGen = new PassGen(this);
+		passGen = new PassGen();
 		passFrame = new PassGenFrame(this);
 	}
 
