@@ -4,9 +4,15 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.GraphicsEnvironment;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
-import javax.swing.JPanel;
+import javax.swing.BorderFactory;
 import javax.swing.JCheckBox;
+import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.JTextPane;
 import javax.swing.SpringLayout;
@@ -48,14 +54,15 @@ public class PassGenPanel extends JPanel {
 
 	private void setupPanel() {
 		this.setLayout(baseLayout);
-		this.setBackground(new Color(62, 96, 111));
+		this.setBackground(new Color(236, 240, 241));
 		this.add(lengthSlider);
 		this.add(passwordDisplay);
 		this.add(lowerCaseCheck);
 		this.add(upperCaseCheck);
 		this.add(numberCheck);
 		this.add(specialCheck);
-		this.passwordDisplay.setEditable(true);
+		this.lowerCaseCheck.setSelected(true);
+		this.passwordDisplay.setEditable(false);
 		Font font = null;
 		try {
 			font = Font.createFont(Font.TRUETYPE_FONT,
@@ -63,8 +70,7 @@ public class PassGenPanel extends JPanel {
 			GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(font);
 			SimpleAttributeSet attribute = new SimpleAttributeSet();
 			StyleConstants.setAlignment(attribute, StyleConstants.ALIGN_CENTER);
-			passwordDisplay.setParagraphAttributes(attribute, false);
-			passwordDisplay.setFont(new Font("Elegant Lux Mager", Font.BOLD, 30));
+			passwordDisplay.setFont(new Font("Elegant Lux Mager", Font.BOLD, 25));
 			passwordDisplay.setText(" ");
 		} catch (FontFormatException | IOException e) {
 			e.printStackTrace();
@@ -93,6 +99,7 @@ public class PassGenPanel extends JPanel {
 			@Override
 			public void stateChanged(ChangeEvent e) {
 				String password = baseController.getPassGen().getRandomPassword(lengthSlider.getValue()/2, lowerCaseCheck.isSelected(), upperCaseCheck.isSelected(), numberCheck.isSelected(), specialCheck.isSelected());
+				
 				System.out.println(password);
 				SwingUtilities.invokeLater(new Runnable() {
 					@Override
@@ -100,6 +107,27 @@ public class PassGenPanel extends JPanel {
 						passwordDisplay.setText(password);
 					}
 				});
+			}
+		});
+		
+		this.passwordDisplay.addMouseListener(new MouseAdapter() {
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				Color selectorColor = new Color(231, 76, 60);
+				passwordDisplay.setBorder(BorderFactory.createLineBorder(selectorColor, 4));
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				passwordDisplay.setBorder(BorderFactory.createEmptyBorder());
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Clipboard clpbrd = Toolkit.getDefaultToolkit().getSystemClipboard();
+				StringSelection stringSelection = new StringSelection(passwordDisplay.getText());
+				clpbrd.setContents(stringSelection, null);
 			}
 		});
 	}

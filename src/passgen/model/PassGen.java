@@ -144,7 +144,7 @@ public class PassGen {
 				}else if(lowerCase == false && upperCase == false && numbers == false && special == true){
 					randomPassword += String.valueOf((char) this.getRandomFromArray(this.specialCharacters));
 				}else{
-					System.out.println("There was an error");
+					randomPassword = "Please Check One of the Boxes";
 				}
 
 			}
