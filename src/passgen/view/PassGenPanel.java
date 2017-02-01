@@ -113,6 +113,7 @@ public class PassGenPanel extends JPanel {
 						passwordDisplay.setText(password);
 					}
 				});
+			
 			}
 		});
 		
