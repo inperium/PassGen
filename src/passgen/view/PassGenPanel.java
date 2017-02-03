@@ -7,6 +7,8 @@ import java.awt.GraphicsEnvironment;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
@@ -105,8 +107,7 @@ public class PassGenPanel extends JPanel {
 		this.lengthSlider.addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent e) {
-				String password = baseController.getPassGen().getRandomPassword(lengthSlider.getValue()/2, lowerCaseCheck.isSelected(), upperCaseCheck.isSelected(), numberCheck.isSelected(), specialCheck.isSelected());
-				System.out.println(password);
+				String password = baseController.getPassGen().getRandomPassword(lengthSlider.getValue()/4, lowerCaseCheck.isSelected(), upperCaseCheck.isSelected(), numberCheck.isSelected(), specialCheck.isSelected());
 				SwingUtilities.invokeLater(new Runnable() {
 					@Override
 					public void run() {
@@ -137,6 +138,14 @@ public class PassGenPanel extends JPanel {
 				clpbrd.setContents(stringSelection, null);
 			}
 		});
-	}
-
+		
+		this.generateButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String password = baseController.getPassGen().getRandomPassword(lengthSlider.getValue()/4, lowerCaseCheck.isSelected(), upperCaseCheck.isSelected(), numberCheck.isSelected(), specialCheck.isSelected());
+				passwordDisplay.setText(password);
+			}
+		});
+}
 }
