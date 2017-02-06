@@ -158,7 +158,7 @@ public class PassGen {
 	
 	
 	/*
-	 * int passwordLength = randomPassword.length();
+	  		int passwordLength = randomPassword.length();
 			
 			int randomNumber = this.random.nextInt(4);
 			if (lowerCase && randomNumber == 0) {
@@ -171,5 +171,4 @@ public class PassGen {
 				randomPassword += String.valueOf((char) this.getRandomFromArray(this.specialCharacters));
 			}
 	 */
-	/// you should log off of your computer when you leave class!!!!!
 }
