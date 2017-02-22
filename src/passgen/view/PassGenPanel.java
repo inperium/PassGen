@@ -38,6 +38,7 @@ public class PassGenPanel extends JPanel {
 	private JLabel passwordDisplay;
 	private JSlider lengthSlider;
 	private JButton generateButton;
+	private JLabel copyLabel;
 
 	public PassGenPanel(PassGenController baseController) {
 		super();
@@ -50,6 +51,7 @@ public class PassGenPanel extends JPanel {
 		numberCheck = new JCheckBox("Numbers");
 		specialCheck = new JCheckBox("Special Characters");
 		generateButton = new JButton("Create a Password");
+		copyLabel = new JLabel("Click to Copy");
 
 		setupPanel();
 		setupLayout();
@@ -67,6 +69,8 @@ public class PassGenPanel extends JPanel {
 		this.add(numberCheck);
 		this.add(specialCheck);
 		this.add(generateButton);
+		this.add(copyLabel);
+		copyLabel.setVisible(false);
 		this.lowerCaseCheck.setSelected(true);
 		Font font = null;
 		try {
@@ -82,6 +86,9 @@ public class PassGenPanel extends JPanel {
 		} catch (FontFormatException | IOException e) {
 			e.printStackTrace();
 		}
+		passwordDisplay.setBackground(Color.WHITE);
+		passwordDisplay.setOpaque(true);
+		repaint();
 	}
 
 	private void setupLayout() {
@@ -101,6 +108,8 @@ public class PassGenPanel extends JPanel {
 		baseLayout.putConstraint(SpringLayout.SOUTH, lengthSlider, -46, SpringLayout.SOUTH, this);
 		baseLayout.putConstraint(SpringLayout.SOUTH, generateButton, -22, SpringLayout.NORTH, upperCaseCheck);
 		baseLayout.putConstraint(SpringLayout.EAST, generateButton, -245, SpringLayout.EAST, this);
+		baseLayout.putConstraint(SpringLayout.NORTH, copyLabel, 17, SpringLayout.SOUTH, passwordDisplay);
+		baseLayout.putConstraint(SpringLayout.WEST, copyLabel, 280, SpringLayout.WEST, this);
 	}
 
 	private void setupListners() {
@@ -124,11 +133,13 @@ public class PassGenPanel extends JPanel {
 			public void mouseEntered(MouseEvent e) {
 				Color selectorColor = new Color(52, 152, 219);
 				passwordDisplay.setBorder(BorderFactory.createLineBorder(selectorColor, 4));
+				copyLabel.setVisible(true);
 			}
 			
 			@Override
 			public void mouseExited(MouseEvent e) {
 				passwordDisplay.setBorder(BorderFactory.createEmptyBorder());
+				copyLabel.setVisible(false);
 			}
 			
 			@Override
@@ -137,6 +148,17 @@ public class PassGenPanel extends JPanel {
 				StringSelection stringSelection = new StringSelection(passwordDisplay.getText());
 				clpbrd.setContents(stringSelection, null);
 			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				passwordDisplay.setBackground(new Color(52, 152, 219));
+			}
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				passwordDisplay.setBackground(Color.WHITE);
+			}
+			
 		});
 		
 		this.generateButton.addActionListener(new ActionListener() {
